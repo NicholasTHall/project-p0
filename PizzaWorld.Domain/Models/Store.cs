@@ -5,18 +5,20 @@ namespace PizzaWorld.Domain.Models
     public class Store
     {
         public List<Order> Orders {get; set;}
-        void CreateOrder()
+        public void CreateOrder()
         {
             Orders.Add(new Order());
         }
 
-        bool DeleteOrder(Order ClientOrder)
+        bool DeleteOrder(Order order)
         {
             try{
-                Orders.Remove(ClientOrder);
+                Orders.Remove(order);
 
                 return true;
-            } catch {
+            } 
+            catch 
+            {
                 return false;
             }         
         }

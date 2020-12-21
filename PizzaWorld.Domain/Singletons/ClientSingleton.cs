@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 using PizzaWorld.Domain.Models;
 
@@ -32,6 +34,14 @@ namespace PizzaWorld.Domain.Singletons
         {
             Stores.Add(new Store());
             Save();
+        }
+
+        public Store SelectStore()
+        {
+            int.TryParse(Console.ReadLine(), out int input);
+            return Stores.ElementAtOrDefault(input);
+
+            //Stores.FirstOrDefault(s => s == input);            
         }
 
         private void Save()
