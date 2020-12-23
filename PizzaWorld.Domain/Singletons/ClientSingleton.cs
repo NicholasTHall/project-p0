@@ -9,7 +9,7 @@ namespace PizzaWorld.Domain.Singletons
 {
     public class ClientSingleton
     {
-        private const string _path = @"./pizzaworld.xml";
+        private readonly string _path = $"{Directory.GetCurrentDirectory()}\\pizzaworld.xml";
         private static ClientSingleton _instance;
         public static ClientSingleton Instance 
         {
@@ -56,6 +56,7 @@ namespace PizzaWorld.Domain.Singletons
         {
             if(!File.Exists(_path)){
                 Stores = new List<Store>();
+                return;
             }
                 var file = new StreamReader(_path);
                 var xml = new XmlSerializer(typeof(List<Store>));
