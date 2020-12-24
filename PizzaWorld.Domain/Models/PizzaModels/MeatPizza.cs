@@ -18,11 +18,11 @@ namespace PizzaWorld.Domain.Models.PizzaModels
 
         protected override void AddToppings()
         {
-            Toppings = new List<string>
+           /* Toppings = new List<string>
             {
             "cheese",
             "tomato"
-            };
+            };*/
         }
     }
 }

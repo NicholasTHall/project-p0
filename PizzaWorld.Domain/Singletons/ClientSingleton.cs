@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
+using PizzaWorld.Domain.Abstracts;
 using PizzaWorld.Domain.Models;
 
 namespace PizzaWorld.Domain.Singletons
 {
     public class ClientSingleton
     {
-        private readonly string _path = $"{Directory.GetCurrentDirectory()}\\pizzaworld.xml";
+        private readonly string _path = @"./pizzaworld.xml";
         private static ClientSingleton _instance;
         public static ClientSingleton Instance 
         {
@@ -25,6 +26,8 @@ namespace PizzaWorld.Domain.Singletons
         }
 
         public List<Store> Stores {get; set;}
+
+        public List<APizzaModel> Pizzas {get; set;}
         private ClientSingleton()
         {
             Read();

@@ -8,7 +8,7 @@ namespace PizzaWorld.Testing
         [Fact]
         private void Test_PizzaExists()
         {
-            // arrange
+           /* // arrange
             var sut = new Pizza();  // inferenece
             Pizza sut1 = new Pizza(); // memory allocation
 
@@ -17,7 +17,7 @@ namespace PizzaWorld.Testing
             
             // assert
             Assert.IsType<Pizza>(actual);
-            Assert.NotNull(actual);
+            Assert.NotNull(actual);*/
         }
     }
 }
