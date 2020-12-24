@@ -37,11 +37,12 @@ namespace PizzaWorld.Client
             var user = new User();
 
             PrintAllStoresEF();
-            user.SelectedStore = _client.SelectStore();
-            user.SelectedStore.CreateOrder();
+            user.SelectedStore = _sql.SelectStore();
+            user.SelectedStore.CreateOrder();            
             user.Orders.Add(user.SelectedStore.Orders.Last());
             user.Orders.Last().MakeMeatPizza();
             user.Orders.Last().MakeMeatPizza();
+            _sql.Update(user.SelectedStore);
 
             Console.WriteLine(user.ToString());
         }
