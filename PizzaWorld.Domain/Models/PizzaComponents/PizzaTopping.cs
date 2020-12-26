@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PizzaWorld.Domain.Abstracts;
 
 namespace PizzaWorld.Domain.Models.PizzaComponents
 {
-    class PizzaTopping
+    public class PizzaTopping : AEntity
     {
-        public List<String> SelectToppings()
+        public string Toppings {get; set;}
+
+        public PizzaTopping(){}
+        public PizzaTopping(String topping)
         {
-            List<string> toppings = new List<string>();
+            Toppings = topping;
+        }
+        public void SelectToppings()
+        {
             Boolean addT = true;
             while (addT)
             {
@@ -18,20 +25,19 @@ namespace PizzaWorld.Domain.Models.PizzaComponents
                 switch (input)
                 {
                     case 1:
-                        toppings.Add("Pepperoni");
+                        Toppings = "Pepperoni";
                         break;
                     case 2:
-                        toppings.Add("Black Olives");
+                        Toppings = "Black Olives";
                         break;
                     case 3:
-                        toppings.Add("Sausage");
+                        Toppings = "Sausage";
                         break;
                     case 4:
                         addT = false;
                         break;
                 }
             }
-            return toppings;
         }
     }
 }

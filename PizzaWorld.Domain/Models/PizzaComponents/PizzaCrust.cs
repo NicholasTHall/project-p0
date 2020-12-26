@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PizzaWorld.Domain.Models.PizzaComponents
 {
-    class PizzaCrust
+    public class PizzaCrust
     {        
         public string SelectCrust()
         {

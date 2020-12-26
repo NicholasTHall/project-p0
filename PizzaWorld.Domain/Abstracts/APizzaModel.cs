@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using PizzaWorld.Domain.Models.PizzaComponents;
 
 namespace PizzaWorld.Domain.Abstracts
 {
@@ -6,11 +7,12 @@ namespace PizzaWorld.Domain.Abstracts
     {
         public string Crust {get; set;}
         public string Size {get; set;}
-        //public List<string> Toppings {get; set;}
+        public List<PizzaTopping> PizzaToppings {get; set;}
         public double Price {get; set;}
 
         protected APizzaModel()
         {
+            PizzaToppings = new List<PizzaTopping>();
             AddCrust();
             AddSize();
             AddToppings();
