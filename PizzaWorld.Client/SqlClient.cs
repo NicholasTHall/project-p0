@@ -10,7 +10,12 @@ namespace PizzaWorld.Client
     public class SqlClient
     {
         private readonly PizzaWorldContext _db = new PizzaWorldContext();
-       
+
+        public void Update()
+        {
+            _db.SaveChanges();
+        }
+
         public IEnumerable<Store> ReadStores()
         {
             return _db.Stores;
@@ -25,12 +30,7 @@ namespace PizzaWorld.Client
         {
             _db.Add(store);
             _db.SaveChanges();
-        }
-
-        public void Update(Store store)
-        {
-            _db.SaveChanges();
-        }
+        }        
 
         public Store SelectStore(){
             string input = Console.ReadLine();
@@ -47,7 +47,7 @@ namespace PizzaWorld.Client
             return _db.Users;
         }
 
-        public void SaveUser(Store user)
+        public void SaveUser(User user)
         {
             _db.Add(user);
             _db.SaveChanges();
@@ -58,7 +58,7 @@ namespace PizzaWorld.Client
             return _db.PizzaModels;
         }
 
-        public void SavePizzaModel(Store pizzaModel)
+        public void SavePizzaModel(APizzaModel pizzaModel)
         {
             _db.Add(pizzaModel);
             _db.SaveChanges();

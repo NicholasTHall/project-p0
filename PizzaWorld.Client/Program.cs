@@ -35,6 +35,7 @@ namespace PizzaWorld.Client
         static void UserView()
         {
             var user = new User();
+            _sql.SaveUser(user);
 
             PrintAllStoresEF();
             user.SelectedStore = _sql.SelectStore();
@@ -42,7 +43,7 @@ namespace PizzaWorld.Client
             user.Orders.Add(user.SelectedStore.Orders.Last());
             user.Orders.Last().MakeMeatPizza();
             user.Orders.Last().MakeMeatPizza();
-            _sql.Update(user.SelectedStore);
+            _sql.Update();
 
             Console.WriteLine(user.ToString());
         }
