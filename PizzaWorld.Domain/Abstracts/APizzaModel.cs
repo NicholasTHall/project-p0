@@ -16,10 +16,12 @@ namespace PizzaWorld.Domain.Abstracts
             AddCrust();
             AddSize();
             AddToppings();
+            CalculatePrice();
         }
 
         protected virtual void AddCrust() {}
         protected virtual void AddSize() {}
         protected virtual void AddToppings() {}
+        protected virtual void CalculatePrice() {}
     }
 }

@@ -21,5 +21,10 @@ namespace PizzaWorld.Domain.Models.PizzaModels
             PizzaToppings.Add(new PizzaTopping("cheese"));
             PizzaToppings.Add(new PizzaTopping("tomato"));
         }
+
+        protected override void CalculatePrice()
+        {
+            Price = new PizzaPrice().CalculatePrice(Crust, Size, PizzaToppings.Count);
+        }
     }
 }

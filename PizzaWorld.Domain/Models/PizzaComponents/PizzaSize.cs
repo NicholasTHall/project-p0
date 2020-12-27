@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PizzaWorld.Domain.Models.PizzaComponents
 {
@@ -20,8 +16,10 @@ namespace PizzaWorld.Domain.Models.PizzaComponents
                     return "Medium";
                 case 3:
                     return "Large";
-                default:
+                case 4:
                     return "Extra Large";
+                default:
+                    return "Medium";
             }
         }
     }
