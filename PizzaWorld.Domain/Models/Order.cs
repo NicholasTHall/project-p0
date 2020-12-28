@@ -15,6 +15,17 @@ namespace PizzaWorld.Domain.Models
             Pizzas = new List<APizzaModel>();
         }
 
+        public double ComputePricing()
+        {
+            double price = 0;
+            foreach(var pizza in Pizzas)
+            {
+                price += pizza.Price;
+            }
+
+            return price;
+        }
+
         public void MakeMeatPizza()
         {
             Pizzas.Add(_pizzaFactory.Make<MeatPizza>());

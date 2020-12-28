@@ -46,6 +46,10 @@ namespace PizzaWorld.Client
         {
             return _db.Users;
         }
+        public User ReadOneUser(string name)
+        {
+            return _db.Users.FirstOrDefault(u => u.Name == name);
+        }
 
         public void SaveUser(User user)
         {

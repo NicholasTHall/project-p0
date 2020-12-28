@@ -32,10 +32,21 @@ namespace PizzaWorld.Client
             }
         }
 
+        static void PrintAllUsersEF()
+        {
+            foreach(var user in _sql.ReadUsers())
+            {
+                Console.WriteLine(user.Name);
+            }
+        }
+
         static void UserView()
         {
-            var user = new User();
-            _sql.SaveUser(user);
+            PrintAllUsersEF();
+            string userName = Console.ReadLine();
+            var user = _sql.ReadOneUser(userName);
+            //var user = new User();
+            //_sql.SaveUser(user);
 
             PrintAllStoresEF();
             user.SelectedStore = _sql.SelectStore();

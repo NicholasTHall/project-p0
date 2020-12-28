@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,11 @@ namespace PizzaWorld.Domain.Models
     {
         public List<Order> Orders {get; set;}
         public Store SelectedStore {get; set;}
+        public string Name {get; set;}
 
         public User()
         {
+            Name = Console.ReadLine();
             Orders = new List<Order>();
         }
 
@@ -21,9 +24,9 @@ namespace PizzaWorld.Domain.Models
 
             foreach(var p in Orders.Last().Pizzas)
             {
-                sb.AppendLine(p.ToString());
+                sb.AppendLine(p.ToString() + " at price " + p.Price);
             }
-            return $"You have selected this store {SelectedStore} and ordered these pizzs:{sb.ToString()}";
+            return $"You have selected this store {SelectedStore} and ordered these pizzs:\n{sb.ToString()}Total price is:{Orders.Last().ComputePricing()}";
         }
     }
 }
