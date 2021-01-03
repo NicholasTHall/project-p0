@@ -24,6 +24,8 @@ namespace PizzaWorld.Storing
             builder.Entity<Order>().HasKey(o => o.EntityId);
             builder.Entity<APizzaModel>().HasKey(p => p.EntityId);
             builder.Entity<PizzaTopping>().HasKey(t => t.EntityId);
+            builder.Entity<PizzaCrust>().HasKey(c => c.EntityId);
+            builder.Entity<PizzaSize>().HasKey(ps => ps.EntityId);
 
             SeedData(builder);
         }

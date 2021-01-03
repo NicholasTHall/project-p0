@@ -5,20 +5,22 @@ namespace PizzaWorld.Domain.Abstracts
 {
     public class APizzaModel : AEntity
     {
-        public string Crust {get; set;}
-        public string Size {get; set;}
+        public string PizzaType {get; set;}
+        public PizzaCrust Crust {get; set;}
+        public PizzaSize Size {get; set;}
         public List<PizzaTopping> PizzaToppings {get; set;}
-        public double Price {get; set;}
+        public decimal Price {get; set;}
 
         protected APizzaModel()
         {
             PizzaToppings = new List<PizzaTopping>();
+            AddPizzaType();
             AddCrust();
             AddSize();
             AddToppings();
             CalculatePrice();
         }
-
+        protected virtual void AddPizzaType() {}
         protected virtual void AddCrust() {}
         protected virtual void AddSize() {}
         protected virtual void AddToppings() {}

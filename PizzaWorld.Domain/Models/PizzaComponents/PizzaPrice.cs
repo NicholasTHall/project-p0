@@ -4,9 +4,9 @@ namespace PizzaWorld.Domain.Models.PizzaComponents
 {
     public class PizzaPrice
     {
-        public double CalculatePrice(String crust, String size, int toppings)
+        public decimal CalculatePrice(String crust, String size, int toppings)
         {
-            double price = 0;
+            decimal price = 0;
 
             price += CalculateCrustPrice(crust);
             price += CalculateSizePrice(size);
@@ -15,41 +15,41 @@ namespace PizzaWorld.Domain.Models.PizzaComponents
             return price;
         }
 
-        public double CalculateCrustPrice(String crust)
+        public decimal CalculateCrustPrice(String crust)
         {
             switch(crust)
             {
                 case "Regular":
-                    return 1.00;
+                    return 1.00M;
                 case "Thin":
-                    return 0.75;
+                    return 0.75M;
                 case "Cheese Fill":
-                    return 1.50;
+                    return 1.50M;
                 default:
-                    return 1.00;
+                    return 1.00M;
             }
         }
 
-        public double CalculateSizePrice(String size)
+        public decimal CalculateSizePrice(String size)
         {
             switch(size)
             {
                 case "Small":
-                    return 1.00;
+                    return 1.00M;
                 case "Medium":
-                    return 1.50;
+                    return 1.50M;
                 case "Large":
-                    return 2.00;
+                    return 2.00M;
                 case "Extra Large":
-                    return 2.50;
+                    return 2.50M;
                 default:
-                    return 1.50;
+                    return 1.50M;
             }
         }
 
-        public double CalculateToppingsPrice(int toppings)
+        public decimal CalculateToppingsPrice(int toppings)
         {
-            return 0.50 * toppings;
+            return 0.50M * toppings;
         }
     }
 }

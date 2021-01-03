@@ -6,14 +6,21 @@ namespace PizzaWorld.Domain.Models.PizzaModels
 {
     public class MeatPizza : APizzaModel
     {
+        protected override void AddPizzaType()
+        {
+            PizzaType = this.GetType().Name;
+        }
+        
         protected override void AddCrust()
         {
-            Crust = new PizzaCrust().SelectCrust();
+            Crust = new PizzaCrust();
+            Crust.SelectCrust();
         }
 
         protected override void AddSize()
         {
-            Size = new PizzaSize().SelectSize();
+            Size = new PizzaSize();
+            Size.SelectSize();
         }
 
         protected override void AddToppings()
@@ -24,7 +31,7 @@ namespace PizzaWorld.Domain.Models.PizzaModels
 
         protected override void CalculatePrice()
         {
-            Price = new PizzaPrice().CalculatePrice(Crust, Size, PizzaToppings.Count);
+            Price = new PizzaPrice().CalculatePrice(Crust.Crust, Size.Size, PizzaToppings.Count);
         }
     }
 }

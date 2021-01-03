@@ -18,6 +18,18 @@ namespace PizzaWorld.Domain.Models
             Orders = new List<Order>();
         }
 
+        public string OrderHistory()
+        {
+            var sb = new StringBuilder();
+
+            foreach(var p in Orders)
+            {
+                sb.AppendLine(p.ToString());
+            }
+
+            return $"order history: \n{sb.ToString()}";
+        }
+
         public override string ToString()
         {
             var sb = new StringBuilder();

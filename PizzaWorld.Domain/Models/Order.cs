@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 using PizzaWorld.Domain.Abstracts;
 using PizzaWorld.Domain.Factories;
 using PizzaWorld.Domain.Models.PizzaModels;
@@ -15,15 +16,27 @@ namespace PizzaWorld.Domain.Models
             Pizzas = new List<APizzaModel>();
         }
 
-        public double ComputePricing()
+        public decimal ComputePricing()
         {
-            double price = 0;
+            decimal price = 0;
             foreach(var pizza in Pizzas)
             {
                 price += pizza.Price;
             }
 
             return price;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            foreach(var p in Pizzas)
+            {
+                sb.AppendLine(p.PizzaType);
+            };
+
+            return $"ordered these pizzs:\n{sb.ToString()}Total price is:{ComputePricing()}";
         }
 
         public void MakeMeatPizza()
