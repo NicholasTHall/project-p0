@@ -33,13 +33,14 @@ namespace PizzaWorld.Domain.Models
 
         public string OrderSummmary()
         {
-            var sb = new StringBuilder();
+            /*var sb = new StringBuilder();
 
             foreach(var p in Orders.Last().Pizzas)
             {
-                sb.AppendLine(p.PizzaType + " at price " + p.Price);
-            }
-            return $"You have selected this store {SelectedStore} and ordered these pizzs:\n{sb.ToString()}Total price is:{Orders.Last().ComputePricing()}";
+                sb.AppendLine($"{p.PizzaType}: {p.PizzaSize.Size}, {p.PizzaCrust.Crust} with {p.PizzaToppings.Count} toppings at price {p.Price}");
+            }*/
+            return $"You have selected this store {SelectedStore} and {Orders.Last().ToString()}";
+            //ordered these pizzs:\n{sb.ToString()}Total price is:{Orders.Last().ComputePricing()}";
         }
     }
 }

@@ -33,7 +33,7 @@ namespace PizzaWorld.Domain.Models
 
             foreach(var p in Pizzas)
             {
-                sb.AppendLine(p.PizzaType + " at price " + p.Price);
+                sb.AppendLine($"{p.PizzaType}: {p.PizzaSize.Size} Size, {p.PizzaCrust.Crust} Crust with {p.PizzaToppings.Count} toppings at price {p.Price}");
             };
 
             return $"ordered pizzs:\n{sb.ToString()}Total price of order is: {ComputePricing()}";

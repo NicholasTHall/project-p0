@@ -6,8 +6,8 @@ namespace PizzaWorld.Domain.Abstracts
     public class APizzaModel : AEntity
     {
         public string PizzaType {get; set;}
-        public PizzaCrust Crust {get; set;}
-        public PizzaSize Size {get; set;}
+        public PizzaCrust PizzaCrust {get; set;}
+        public PizzaSize PizzaSize {get; set;}
         public List<PizzaTopping> PizzaToppings {get; set;}
         public decimal Price {get; set;}
 

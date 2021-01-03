@@ -13,14 +13,14 @@ namespace PizzaWorld.Domain.Models.PizzaModels
         
         protected override void AddCrust()
         {
-            Crust = new PizzaCrust();
-            Crust.SelectCrust();
+            PizzaCrust = new PizzaCrust();
+            PizzaCrust.SelectCrust();
         }
 
         protected override void AddSize()
         {
-            Size = new PizzaSize();
-            Size.SelectSize();
+            PizzaSize = new PizzaSize();
+            PizzaSize.SelectSize();
         }
 
         protected override void AddToppings()
@@ -31,7 +31,7 @@ namespace PizzaWorld.Domain.Models.PizzaModels
 
         protected override void CalculatePrice()
         {
-            Price = new PizzaPrice().CalculatePrice(Crust.Crust, Size.Size, PizzaToppings.Count);
+            Price = new PizzaPrice().CalculatePrice(PizzaCrust.Crust, PizzaSize.Size, PizzaToppings.Count);
         }
     }
 }

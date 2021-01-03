@@ -24,9 +24,10 @@ namespace PizzaWorld.Client
 
         public Store ReadOneStore(string name)
         {
-            return _db.Stores.Include(s => s.Orders).
-            ThenInclude(o => o.Pizzas).
-            FirstOrDefault<Store>(s => s.Name == name);
+            return _db.Stores.Include(s => s.Orders).ThenInclude(o => o.Pizzas).ThenInclude(c => c.PizzaCrust)
+                             .Include(s => s.Orders).ThenInclude(o => o.Pizzas).ThenInclude(ps => ps.PizzaSize)
+                             .Include(s => s.Orders).ThenInclude(o => o.Pizzas).ThenInclude(t => t.PizzaToppings)
+                             .FirstOrDefault<Store>(s => s.Name == name);
         }
 
         public void SaveStore(Store store)
@@ -46,9 +47,10 @@ namespace PizzaWorld.Client
         }
         public User ReadOneUser(string name)
         {
-            return _db.Users.Include(u => u.Orders).
-            ThenInclude(o => o.Pizzas).
-            FirstOrDefault<User>(u => u.Name == name);
+            return _db.Users.Include(u => u.Orders).ThenInclude(o => o.Pizzas).ThenInclude(c => c.PizzaCrust)
+                            .Include(u => u.Orders).ThenInclude(o => o.Pizzas).ThenInclude(ps => ps.PizzaSize)
+                            .Include(u => u.Orders).ThenInclude(o => o.Pizzas).ThenInclude(t => t.PizzaToppings)
+                            .FirstOrDefault<User>(u => u.Name == name);
         }
 
         public User SelectUser(){
