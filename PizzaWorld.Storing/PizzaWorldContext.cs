@@ -27,10 +27,11 @@ namespace PizzaWorld.Storing
             builder.Entity<PizzaCrust>().HasKey(c => c.EntityId);
             builder.Entity<PizzaSize>().HasKey(ps => ps.EntityId);
 
-            SeedData(builder);
+            SeedStoreData(builder);
+            SeedUserData(builder);
         }
 
-        private void SeedData(ModelBuilder builder)
+        private void SeedStoreData(ModelBuilder builder)
         {
             builder.Entity<Store>().HasData( new List<Store>
                 {
@@ -38,6 +39,17 @@ namespace PizzaWorld.Storing
                     new Store() {EntityId = 2, Name = "Two"},
                     new Store() {EntityId = 3, Name = "Three"},
                     new Store() {EntityId = 4, Name = "Four"}
+                }
+            );
+        }
+        private void SeedUserData(ModelBuilder builder)
+        {
+            builder.Entity<User>().HasData( new List<User>
+                {
+                    new User() {EntityId = 1, Name = "UserOne"},
+                    new User() {EntityId = 2, Name = "UserTwo"},
+                    new User() {EntityId = 3, Name = "UserThree"},
+                    new User() {EntityId = 4, Name = "UserFour"}
                 }
             );
         }

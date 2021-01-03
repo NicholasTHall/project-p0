@@ -14,7 +14,6 @@ namespace PizzaWorld.Domain.Models
 
         public User()
         {
-            Name = Console.ReadLine();
             Orders = new List<Order>();
         }
 
@@ -22,21 +21,23 @@ namespace PizzaWorld.Domain.Models
         {
             var sb = new StringBuilder();
 
+            int cnt = 0;
             foreach(var p in Orders)
             {
-                sb.AppendLine(p.ToString());
+                cnt += 1;
+                sb.AppendLine($"Order {cnt} {p.ToString()}");
             }
 
             return $"order history: \n{sb.ToString()}";
         }
 
-        public override string ToString()
+        public string OrderSummmary()
         {
             var sb = new StringBuilder();
 
             foreach(var p in Orders.Last().Pizzas)
             {
-                sb.AppendLine(p.ToString() + " at price " + p.Price);
+                sb.AppendLine(p.PizzaType + " at price " + p.Price);
             }
             return $"You have selected this store {SelectedStore} and ordered these pizzs:\n{sb.ToString()}Total price is:{Orders.Last().ComputePricing()}";
         }

@@ -36,7 +36,7 @@ namespace PizzaWorld.Domain.Models
                 sb.AppendLine(p.PizzaType);
             };
 
-            return $"ordered these pizzs:\n{sb.ToString()}Total price is:{ComputePricing()}";
+            return $"ordered pizzs:\n{sb.ToString()}Total price is:{ComputePricing()}";
         }
 
         public void MakeMeatPizza()

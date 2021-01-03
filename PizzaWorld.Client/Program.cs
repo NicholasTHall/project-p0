@@ -42,13 +42,14 @@ namespace PizzaWorld.Client
 
         static void UserView()
         {
-            //PrintAllUsersEF();
-            //Console.WriteLine("pick user");            
-            //var user = _sql.ReadOneUser("test");
+            PrintAllUsersEF();
+            Console.WriteLine("pick user");  
+            var user = _sql.SelectUser();      
+            //var user = _sql.ReadOneUser("UserOne");
             //user.Orders = _sql.ReadUserHistory(user) as List<Order>;
             
-            var user = new User();
-            _sql.SaveUser(user);
+            //var user = new User();
+            //_sql.SaveUser(user);
 
             PrintAllStoresEF();
             user.SelectedStore = _sql.SelectStore();
@@ -58,7 +59,7 @@ namespace PizzaWorld.Client
             user.Orders.Last().MakeMeatPizza();
             _sql.Update();
 
-            Console.WriteLine(user.ToString());
+            Console.WriteLine(user.OrderSummmary());
             Console.WriteLine(user.OrderHistory());
         }
     }

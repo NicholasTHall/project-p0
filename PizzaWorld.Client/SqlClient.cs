@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PizzaWorld.Domain.Abstracts;
 using PizzaWorld.Domain.Models;
 using PizzaWorld.Storing;
@@ -48,7 +49,9 @@ namespace PizzaWorld.Client
         }
         public User ReadOneUser(string name)
         {
-            return _db.Users.FirstOrDefault(u => u.Name == name);
+            return _db.Users.Include(u => u.Orders).
+            ThenInclude(o => o.Pizzas).
+            FirstOrDefault<User>(u => u.Name == name);
         }
 
         public User SelectUser(){
