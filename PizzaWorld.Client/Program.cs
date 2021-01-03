@@ -12,13 +12,13 @@ namespace PizzaWorld.Client
 
         private readonly static SqlClient _sql = new SqlClient();
         static void Main(string[] args)
-        {            
+        {
             UserView();
         }
 
         static void PrintAllStores()
         {
-            foreach(var store in _client.Stores)
+            foreach (var store in _client.Stores)
             {
                 Console.WriteLine(store);
             }
@@ -26,7 +26,7 @@ namespace PizzaWorld.Client
 
         static void PrintAllStoresEF()
         {
-            foreach(var store in _sql.ReadStores())
+            foreach (var store in _sql.ReadStores())
             {
                 Console.WriteLine(store);
             }
@@ -34,7 +34,7 @@ namespace PizzaWorld.Client
 
         static void PrintAllUsersEF()
         {
-            foreach(var user in _sql.ReadUsers())
+            foreach (var user in _sql.ReadUsers())
             {
                 Console.WriteLine(user.Name);
             }
@@ -43,10 +43,10 @@ namespace PizzaWorld.Client
         static void UserView()
         {
             PrintAllUsersEF();
-            Console.WriteLine("pick user");  
-            var user = _sql.SelectUser();      
+            Console.WriteLine("pick user");
+            var user = _sql.SelectUser();
             //var user = _sql.ReadOneUser("UserOne");
-            
+
             //var user = new User();
             //_sql.SaveUser(user);
 
@@ -54,7 +54,7 @@ namespace PizzaWorld.Client
             //var store = _sql.SelectStore();
             //Console.WriteLine(store.OrderHistory());
             user.SelectedStore = _sql.SelectStore();
-            user.SelectedStore.CreateOrder();            
+            user.SelectedStore.CreateOrder();
             user.Orders.Add(user.SelectedStore.Orders.Last());
             user.Orders.Last().MakeMeatPizza();
             user.Orders.Last().MakeMeatPizza();

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using PizzaWorld.Domain.Abstracts;
 using PizzaWorld.Domain.Factories;
@@ -25,6 +26,16 @@ namespace PizzaWorld.Domain.Models
             }
 
             return price;
+        }
+
+        public bool LimitCheck()
+        {
+          if(Pizzas.Count > 50 || ComputePricing() > 250M)
+          {
+            Pizzas.RemoveAt(Pizzas.Count-1);
+            return true;
+          }
+          return false;
         }
 
         public override string ToString()

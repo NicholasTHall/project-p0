@@ -10,7 +10,7 @@ namespace PizzaWorld.Domain.Models.PizzaModels
         {
             PizzaType = this.GetType().Name;
         }
-        
+
         protected override void AddCrust()
         {
             PizzaCrust = new PizzaCrust();

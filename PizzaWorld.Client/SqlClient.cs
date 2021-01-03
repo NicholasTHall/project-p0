@@ -34,7 +34,7 @@ namespace PizzaWorld.Client
         {
             _db.Add(store);
             _db.SaveChanges();
-        }        
+        }
 
         public Store SelectStore(){
             string input = Console.ReadLine();
