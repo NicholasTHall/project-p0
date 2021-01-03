@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 using PizzaWorld.Domain.Abstracts;
 
 namespace PizzaWorld.Domain.Models
@@ -28,6 +29,20 @@ namespace PizzaWorld.Domain.Models
             {
                 return false;
             }         
+        }
+
+        public string OrderHistory()
+        {
+            var sb = new StringBuilder();
+
+            int cnt = 0;
+            foreach(var p in Orders)
+            {
+                cnt += 1;
+                sb.AppendLine($"Order {cnt} {p.ToString()}");
+            }
+
+            return $"order history: \n{sb.ToString()}";
         }
 
         public override string ToString()

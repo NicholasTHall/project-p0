@@ -24,7 +24,9 @@ namespace PizzaWorld.Client
 
         public Store ReadOneStore(string name)
         {
-            return _db.Stores.FirstOrDefault(s => s.Name == name);
+            return _db.Stores.Include(s => s.Orders).
+            ThenInclude(o => o.Pizzas).
+            FirstOrDefault<Store>(s => s.Name == name);
         }
 
         public void SaveStore(Store store)
@@ -36,11 +38,6 @@ namespace PizzaWorld.Client
         public Store SelectStore(){
             string input = Console.ReadLine();
             return ReadOneStore(input);
-        }
-
-        public IEnumerable<Order> ReadStoreOrders(Store store)
-        {
-            return ReadOneStore(store.Name).Orders;
         }
 
         public IEnumerable<User> ReadUsers()
@@ -63,12 +60,6 @@ namespace PizzaWorld.Client
         {
             _db.Add(user);
             _db.SaveChanges();
-        }
-
-        public IEnumerable<Order> ReadUserHistory(User user)
-        {
-            Console.WriteLine(ReadOneUser(user.Name).Orders.Count);
-            return ReadOneUser(user.Name).Orders;
         }
 
         public IEnumerable<APizzaModel> ReadPizzaModel()
