@@ -37,7 +37,7 @@ namespace PizzaWorld.Client
             return ReadOneStore(input);
         }
 
-        public IEnumerable<Order> ReadOrders(Store store)
+        public IEnumerable<Order> ReadStoreOrders(Store store)
         {
             return ReadOneStore(store.Name).Orders;
         }
@@ -51,10 +51,21 @@ namespace PizzaWorld.Client
             return _db.Users.FirstOrDefault(u => u.Name == name);
         }
 
+        public User SelectUser(){
+            string input = Console.ReadLine();
+            return ReadOneUser(input);
+        }
+
         public void SaveUser(User user)
         {
             _db.Add(user);
             _db.SaveChanges();
+        }
+
+        public IEnumerable<Order> ReadUserHistory(User user)
+        {
+            Console.WriteLine(ReadOneUser(user.Name).Orders.Count);
+            return ReadOneUser(user.Name).Orders;
         }
 
         public IEnumerable<APizzaModel> ReadPizzaModel()
