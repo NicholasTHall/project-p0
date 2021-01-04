@@ -78,6 +78,10 @@ namespace PizzaWorld.Domain.Models
     {
       Pizzas.Add(_pizzaFactory.Make<MeatPizza>());
     }
+    public void MakeBuffaloChickenPizza()
+    {
+      Pizzas.Add(_pizzaFactory.Make<BuffaloChickenPizza>());
+    }
     public void MakeCustomPizza()
     {
       Pizzas.Add(_pizzaFactory.Make<CustomPizza>());
