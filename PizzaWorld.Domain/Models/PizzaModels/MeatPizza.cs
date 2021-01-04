@@ -25,8 +25,11 @@ namespace PizzaWorld.Domain.Models.PizzaModels
 
         protected override void AddToppings()
         {
-            PizzaToppings.Add(new PizzaTopping("cheese"));
-            PizzaToppings.Add(new PizzaTopping("tomato"));
+            PizzaToppings.Add(new PizzaTopping("Sauce"));
+            PizzaToppings.Add(new PizzaTopping("Cheese"));
+            PizzaToppings.Add(new PizzaTopping("Pepperoni"));
+            PizzaToppings.Add(new PizzaTopping("Sausage"));
+            PizzaToppings.Add(new PizzaTopping("Steak"));
         }
 
         protected override void CalculatePrice()

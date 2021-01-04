@@ -46,15 +46,24 @@ namespace PizzaWorld.Domain.Models
 
             foreach(var p in Pizzas)
             {
-                sb.AppendLine($"{p.PizzaType}: {p.PizzaSize.Size} Size, {p.PizzaCrust.Crust} Crust with {p.PizzaToppings.Count} toppings at price {p.Price}");
+                sb.Append($"{p.PizzaType}: {p.PizzaSize.Size} Size, {p.PizzaCrust.Crust} Crust with {p.PizzaToppings.Count} toppings: ");
+                foreach(var t in p.PizzaToppings)
+                {
+                  sb.Append($"[{t.Toppings}] ");
+                }
+                sb.Append($"at price {p.Price}\n");
             };
 
-            return $"ordered pizzs:\n{sb.ToString()}Total price of order is: {ComputePricing()}";
+            return $"ordered pizzas:\n{sb.ToString()}Total price of order is: {ComputePricing()}";
         }
 
         public void MakeMeatPizza()
         {
             Pizzas.Add(_pizzaFactory.Make<MeatPizza>());
+        }
+        public void MakeCustomPizza()
+        {
+            Pizzas.Add(_pizzaFactory.Make<CustomPizza>());
         }
     }
 }

@@ -48,8 +48,18 @@ namespace PizzaWorld.Client
 
       //var user = new User();
       //_sql.SaveUser(user);
-      UserMakeOrder(user);
+      user.SelectedStore = _sql.SelectStore();
+      user.SelectedStore.CreateOrder();
+      user.Orders.Add(user.SelectedStore.Orders.Last());
+      user.Orders.Last().MakeCustomPizza();
+      user.Orders.Last().MakeCustomPizza();
+      user.Orders.Last().OrderDate = DateTime.Now;
+      _sql.Update();
 
+      Console.WriteLine(user.OrderSummmary());
+
+      //UserMakeOrder(user);
+      //UserOrderHistory(user);
     }
 
     static void UserOrderHistory(User user)
