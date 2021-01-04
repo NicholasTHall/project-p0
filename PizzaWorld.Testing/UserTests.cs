@@ -8,16 +8,61 @@ namespace PizzaWorld.Testing
         [Fact]
         private void Test_UserExists()
         {
-            // arrange
-            var sut = new User();  // inferenece
-            User sut1 = new User(); // memory allocation
+            var sut = new User();
+            User sut1 = new User();
 
-            // act
             var actual = sut;
-            
-            // assert
+
             Assert.IsType<User>(actual);
             Assert.NotNull(actual);
+        }
+
+        [Fact]
+        private void Test_UserOrderHistoryExist()
+        {
+            var sut = new User();
+            User sut1 = new User();
+
+            var actual = sut;
+
+            Assert.IsType<User>(actual);
+            Assert.NotNull(actual.OrderHistory());
+        }
+
+        [Fact]
+        private void Test_UserOrderSummaryExist()
+        {
+            var sut = new User();
+            User sut1 = new User();
+
+            var actual = sut;
+
+            Assert.IsType<User>(actual);
+            Assert.NotNull(actual.OrderSummmary());
+        }
+
+        [Fact]
+        private void Test_UserOrderTimeLimitCheckExist()
+        {
+            var sut = new User();
+            User sut1 = new User();
+
+            var actual = sut;
+
+            Assert.IsType<User>(actual);
+            Assert.False(actual.OrderTimeLimitCheck());
+        }
+
+        [Fact]
+        private void Test_UserStoreChangeCheckExist()
+        {
+            var sut = new User();
+            User sut1 = new User();
+
+            var actual = sut;
+
+            Assert.IsType<User>(actual);
+            Assert.False(actual.StoreChangeCheck());
         }
     }
 }
