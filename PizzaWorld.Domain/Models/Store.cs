@@ -133,10 +133,29 @@ namespace PizzaWorld.Domain.Models
       var sb = new StringBuilder();
 
       int cnt = 0;
-      foreach (var p in Orders)
+      foreach (var o in Orders)
       {
         cnt += 1;
-        sb.AppendLine($"Order {cnt} {p.ToString()}");
+        sb.AppendLine($"Order {cnt} {o.ToString()}");
+      }
+
+      return $"order history: \n{sb.ToString()}";
+    }
+
+    public string UserOrderHistory(User user)
+    {
+      var sb = new StringBuilder();
+
+      int cnt = 0;
+      foreach (var so in Orders)
+      {
+        foreach(var uo in user.Orders)
+        {
+          if(so.EntityId == uo.EntityId){
+            cnt += 1;
+            sb.AppendLine($"Order {cnt} {so.ToString()}");
+          }
+        }
       }
 
       return $"order history: \n{sb.ToString()}";

@@ -51,10 +51,10 @@ namespace PizzaWorld.Domain.Models
             var sb = new StringBuilder();
 
             int cnt = 0;
-            foreach(var p in Orders)
+            foreach(var o in Orders)
             {
                 cnt += 1;
-                sb.AppendLine($"Order {cnt} {p.ToString()}");
+                sb.AppendLine($"Order {cnt} {o.ToString()}");
             }
 
             return $"order history: \n{sb.ToString()}";
