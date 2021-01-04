@@ -25,6 +25,8 @@ namespace PizzaWorld.Domain.Models.PizzaComponents
                     return 0.75M;
                 case "Cheese Fill":
                     return 1.50M;
+                case "Gluten Free":
+                    return 2.00M;
                 default:
                     return 1.00M;
             }

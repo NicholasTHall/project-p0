@@ -241,8 +241,11 @@ namespace PizzaWorld.Client
         + "2. Order CustomPizza\n"
         + "3. Order MeatPizza\n"
         + "4. Order BuffaloChickenPizza\n"
-        + "5. Remove a Pizza\n"
-        + "6. Finish Order");
+        + "5. Order HawaiianPizza\n"
+        + "6. Order PillyCheeseSteakPizza\n"
+        + "7. Order GlutenFreePizza\n"
+        + "8. Remove a Pizza\n"
+        + "9. Finish Order");
         int.TryParse(Console.ReadLine(), out int input);
         switch (input)
         {
@@ -262,12 +265,24 @@ namespace PizzaWorld.Client
             user.Orders.Last().LimitCheck();
             break;
           case 5:
+            user.Orders.Last().MakeHawaiianPizza();
+            user.Orders.Last().LimitCheck();
+            break;
+          case 6:
+            user.Orders.Last().MakePillyCheeseSteakPizza();
+            user.Orders.Last().LimitCheck();
+            break;
+          case 7:
+            user.Orders.Last().MakeGlutenFreePizza();
+            user.Orders.Last().LimitCheck();
+            break;
+          case 8:
             Console.WriteLine(user.OrderSummmary());
             Console.WriteLine("Choose a pizza to remove (number)");
             int.TryParse(Console.ReadLine(), out int pizzaSelect);
             user.Orders.Last().DeletePizza(pizzaSelect - 1);
             break;
-          case 6:
+          case 9:
             addpizzas = false;
             break;
           default:
