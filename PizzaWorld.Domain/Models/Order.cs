@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace PizzaWorld.Domain.Models
     {
         private GenericPizzaFactory _pizzaFactory = new GenericPizzaFactory();
         public List<APizzaModel> Pizzas {get; set;}
+        public DateTime OrderDate {get; set;}
 
         public Order()
         {

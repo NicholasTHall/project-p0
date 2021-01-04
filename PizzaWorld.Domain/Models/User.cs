@@ -17,6 +17,35 @@ namespace PizzaWorld.Domain.Models
             Orders = new List<Order>();
         }
 
+        public bool OrderTimeLimitCheck()
+        {
+          if(!Orders.Any())
+          {
+            return false;
+          }
+
+          if(Orders.Last().OrderDate.AddHours(2).CompareTo(DateTime.Now)>0)
+          {
+            return true;
+          }
+
+          return false;
+        }
+
+        public bool StoreChangeCheck()
+        {
+          if(!Orders.Any())
+          {
+            return false;
+          }
+
+          if(Orders.Last().OrderDate.AddDays(1).CompareTo(DateTime.Now)>0)
+          {
+            return true;
+          }
+          return false;
+        }
+
         public string OrderHistory()
         {
             var sb = new StringBuilder();
@@ -33,14 +62,7 @@ namespace PizzaWorld.Domain.Models
 
         public string OrderSummmary()
         {
-            /*var sb = new StringBuilder();
-
-            foreach(var p in Orders.Last().Pizzas)
-            {
-                sb.AppendLine($"{p.PizzaType}: {p.PizzaSize.Size}, {p.PizzaCrust.Crust} with {p.PizzaToppings.Count} toppings at price {p.Price}");
-            }*/
             return $"You have selected this store {SelectedStore} and {Orders.Last().ToString()}";
-            //ordered these pizzs:\n{sb.ToString()}Total price is:{Orders.Last().ComputePricing()}";
         }
     }
 }
