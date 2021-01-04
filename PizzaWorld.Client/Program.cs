@@ -42,15 +42,19 @@ namespace PizzaWorld.Client
 
     static void UserView()
     {
-      PrintAllUsersEF();
-      var user = _sql.SelectUser();
+      //PrintAllUsersEF();
+      //var user = _sql.SelectUser();
+      //UserMakeOrder(user);
       //var user = _sql.ReadOneUser("UserOne");
 
-      //var user = new User();
-      //_sql.SaveUser(user);
-      PrintAllStoresEF();
-      var store = _sql.SelectStore();
-      Console.WriteLine(store.UserOrderHistory(user));
+      var user = new User();
+      Console.WriteLine("Enter username for new user");
+      user.Name = Console.ReadLine();
+      _sql.SaveUser(user);
+      UserMakeOrder(user);
+      //PrintAllStoresEF();
+      //var store = _sql.SelectStore();
+      //Console.WriteLine(store.UserOrderHistory(user));
       //Console.WriteLine(store.MonthlyPizzaStats());
       //Console.WriteLine(store.WeeklyPizzaStats());
       /*user.SelectedStore = _sql.SelectStore();
@@ -74,6 +78,7 @@ namespace PizzaWorld.Client
 
     static void UserMakeOrder(User user)
     {
+      bool addpizzas = true;
       if (user.OrderTimeLimitCheck())
       {
         Console.WriteLine("Cannot place an order within two hours of another order");
@@ -82,20 +87,59 @@ namespace PizzaWorld.Client
 
       PrintAllStoresEF();
       var store = _sql.SelectStore();
-      if (!user.SelectedStore.Equals(store))
+      if (!(user.SelectedStore == null))
       {
-        if (user.StoreChangeCheck())
+        if (!user.SelectedStore.Equals(store))
         {
-          Console.WriteLine("Cannot changes stores within 24 hours of another order");
-          return;
+          if (user.StoreChangeCheck())
+          {
+            Console.WriteLine("Cannot changes stores within 24 hours of another order");
+            return;
+          }
         }
       }
 
       user.SelectedStore = store;
       user.SelectedStore.CreateOrder();
       user.Orders.Add(user.SelectedStore.Orders.Last());
-      user.Orders.Last().MakeMeatPizza();
-      user.Orders.Last().MakeMeatPizza();
+      while (addpizzas)
+      {
+        Console.WriteLine("Choose action (number)");
+        Console.WriteLine(""
+        + "1. Order Summary\n"
+        + "2. Order CustomPizza\n"
+        + "3. Order MeatPizza\n"
+        + "4. Remove a Pizza\n"
+        + "5. Finish Order");
+        int.TryParse(Console.ReadLine(), out int input);
+        switch (input)
+        {
+          case 1:
+            Console.WriteLine(user.OrderSummmary());
+            break;
+          case 2:
+            user.Orders.Last().MakeCustomPizza();
+            user.Orders.Last().LimitCheck();
+            break;
+          case 3:
+            user.Orders.Last().MakeMeatPizza();
+            user.Orders.Last().LimitCheck();
+            break;
+          case 4:
+            Console.WriteLine(user.OrderSummmary());
+            Console.WriteLine("Choose a pizza to remove (number)");
+            int.TryParse(Console.ReadLine(), out int pizzaSelect);
+            user.Orders.Last().DeletePizza(pizzaSelect - 1);
+            break;
+          case 5:
+            addpizzas = false;
+            break;
+          default:
+            Console.WriteLine("Unknown input try again");
+            break;
+        }
+      }
+
       user.Orders.Last().OrderDate = DateTime.Now;
       _sql.Update();
 

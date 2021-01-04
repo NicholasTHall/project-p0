@@ -16,8 +16,7 @@ namespace PizzaWorld.Domain.Models.PizzaComponents
     {
       string[] lines = System.IO.File.ReadAllLines(@"Toppings.txt");
 
-      // Display the file contents by using a foreach loop.
-      System.Console.WriteLine("Add/Remove toppings:");
+      Console.WriteLine("Add/Remove toppings:");
       int cnt = 0;
       foreach (string line in lines)
       {
@@ -31,6 +30,7 @@ namespace PizzaWorld.Domain.Models.PizzaComponents
       }
       catch
       {
+        Console.WriteLine($"Unknown input auto selected:{lines[1]}");
         Toppings = lines[1];
       }
     }

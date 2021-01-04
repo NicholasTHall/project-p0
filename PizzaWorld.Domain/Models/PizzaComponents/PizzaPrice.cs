@@ -35,15 +35,15 @@ namespace PizzaWorld.Domain.Models.PizzaComponents
             switch(size)
             {
                 case "Small":
-                    return 1.00M;
+                    return 11.00M;
                 case "Medium":
-                    return 1.50M;
+                    return 11.50M;
                 case "Large":
-                    return 2.00M;
+                    return 12.00M;
                 case "Extra Large":
-                    return 2.50M;
+                    return 12.50M;
                 default:
-                    return 1.50M;
+                    return 11.50M;
             }
         }
 
