@@ -15,6 +15,11 @@ namespace PizzaWorld.Domain.Models.PizzaComponents
         public void SelectSize()
         {
             Console.WriteLine("Select Size");
+            Console.WriteLine(""
+            + "1. Small\n"
+            + "2. Medium\n"
+            + "3. Large\n"
+            + "4. Extra Large");
             int.TryParse(Console.ReadLine(), out int input);
             switch (input)
             {
@@ -31,6 +36,7 @@ namespace PizzaWorld.Domain.Models.PizzaComponents
                     Size = "Extra Large";
                     break;
                 default:
+                    Console.WriteLine($"Unknown input auto selected: Medium");
                     Size = "Medium";
                     break;
             }
