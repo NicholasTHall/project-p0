@@ -13,7 +13,39 @@ namespace PizzaWorld.Client
     private readonly static SqlClient _sql = new SqlClient();
     static void Main(string[] args)
     {
-      UserView();
+      bool userAction = true;
+      while (userAction)
+      {
+        Console.WriteLine("Choose action (number)");
+        Console.WriteLine(""
+        + "1. Create New User\n"
+        + "2. Select User\n"
+        + "3. Select Store\n"
+        + "4. Quit");
+        int.TryParse(Console.ReadLine(), out int input);
+        switch (input)
+        {
+          case 1:
+            MakeNewUser();
+            break;
+          case 2:
+            PrintAllUsersEF();
+            var user = _sql.SelectUser();
+            UserView(user);
+            break;
+          case 3:
+            PrintAllStoresEF();
+            var store = _sql.SelectStore();
+            StoreView(store);
+            break;
+          case 4:
+            userAction = false;
+            break;
+          default:
+            Console.WriteLine("Unknown input try again");
+            break;
+        }
+      }
     }
 
     static void PrintAllStores()
@@ -39,36 +71,138 @@ namespace PizzaWorld.Client
         Console.WriteLine(user.Name);
       }
     }
-
-    static void UserView()
+    static void StoreView(Store store)
     {
-      //PrintAllUsersEF();
-      //var user = _sql.SelectUser();
-      //UserMakeOrder(user);
-      //var user = _sql.ReadOneUser("UserOne");
+      bool storeAction = true;
+      while (storeAction)
+      {
+        Console.WriteLine("Choose action (number)");
+        Console.WriteLine(""
+        + "1. OrderHistory Action\n"
+        + "2. Sales Action\n"
+        + "3. Cancel");
+        int.TryParse(Console.ReadLine(), out int input);
+        switch (input)
+        {
+          case 1:
+            StoreHistoryView(store);
+            break;
+          case 2:
+            StoreSalesView(store);
+            break;
+          case 3:
+            storeAction = false;
+            return;
+          default:
+            Console.WriteLine("Unknown input try again");
+            break;
+        }
+      }
+    }
 
+    static void StoreHistoryView(Store store)
+    {
+      bool storeAction = true;
+      while (storeAction)
+      {
+        Console.WriteLine("Choose action (number)");
+        Console.WriteLine(""
+        + "1. Full Order History\n"
+        + "2. Filter Order History by a user\n"
+        + "3. Cancel");
+        int.TryParse(Console.ReadLine(), out int input);
+        switch (input)
+        {
+          case 1:
+            Console.WriteLine(store.OrderHistory());
+            break;
+          case 2:
+            PrintAllUsersEF();
+            var user = _sql.SelectUser();
+            Console.WriteLine(store.UserOrderHistory(user));
+            break;
+          case 3:
+            storeAction = false;
+            return;
+          default:
+            Console.WriteLine("Unknown input try again");
+            break;
+        }
+      }
+    }
+
+    static void StoreSalesView(Store store)
+    {
+      bool storeAction = true;
+      while (storeAction)
+      {
+        Console.WriteLine("Choose action (number)");
+        Console.WriteLine(""
+        + "1. Weekly revenue\n"
+        + "2. Weekly pizza type and count\n"
+        + "3. Monthly revenue\n"
+        + "4. Monthly pizza type and count\n"
+        + "5. Cancel");
+        int.TryParse(Console.ReadLine(), out int input);
+        switch (input)
+        {
+          case 1:
+            Console.WriteLine(store.WeeklyRevenue());
+            break;
+          case 2:
+            Console.WriteLine(store.WeeklyPizzaStats());
+            break;
+          case 3:
+            Console.WriteLine(store.MonthlyRevenue());
+            break;
+          case 4:
+            Console.WriteLine(store.MonthlyPizzaStats());
+            break;
+          case 5:
+            storeAction = false;
+            return;
+          default:
+            Console.WriteLine("Unknown input try again");
+            break;
+        }
+      }
+    }
+
+    static void UserView(User user)
+    {
+      bool userAction = true;
+      while (userAction)
+      {
+        Console.WriteLine("Choose action (number)");
+        Console.WriteLine(""
+        + "1. Get OrderHistory\n"
+        + "2. Make Order\n"
+        + "3. Cancel");
+        int.TryParse(Console.ReadLine(), out int input);
+        switch (input)
+        {
+          case 1:
+            Console.WriteLine(user.OrderHistory());
+            break;
+          case 2:
+            if (UserMakeOrder(user)) { userAction = false; }
+            break;
+          case 3:
+            userAction = false;
+            return;
+          default:
+            Console.WriteLine("Unknown input try again");
+            break;
+        }
+      }
+    }
+
+    static void MakeNewUser()
+    {
       var user = new User();
       Console.WriteLine("Enter username for new user");
       user.Name = Console.ReadLine();
       _sql.SaveUser(user);
-      UserMakeOrder(user);
-      //PrintAllStoresEF();
-      //var store = _sql.SelectStore();
-      //Console.WriteLine(store.UserOrderHistory(user));
-      //Console.WriteLine(store.MonthlyPizzaStats());
-      //Console.WriteLine(store.WeeklyPizzaStats());
-      /*user.SelectedStore = _sql.SelectStore();
-      user.SelectedStore.CreateOrder();
-      user.Orders.Add(user.SelectedStore.Orders.Last());
-      user.Orders.Last().MakeCustomPizza();
-      user.Orders.Last().MakeCustomPizza();
-      user.Orders.Last().OrderDate = DateTime.Now;
-      _sql.Update();
-
-      Console.WriteLine(user.OrderSummmary());*/
-
-      //UserMakeOrder(user);
-      //UserOrderHistory(user);
     }
 
     static void UserOrderHistory(User user)
@@ -76,13 +210,13 @@ namespace PizzaWorld.Client
       Console.WriteLine(user.OrderHistory());
     }
 
-    static void UserMakeOrder(User user)
+    static bool UserMakeOrder(User user)
     {
       bool addpizzas = true;
       if (user.OrderTimeLimitCheck())
       {
         Console.WriteLine("Cannot place an order within two hours of another order");
-        return;
+        return false;
       }
 
       PrintAllStoresEF();
@@ -94,7 +228,7 @@ namespace PizzaWorld.Client
           if (user.StoreChangeCheck())
           {
             Console.WriteLine("Cannot changes stores within 24 hours of another order");
-            return;
+            return false;
           }
         }
       }
@@ -144,6 +278,7 @@ namespace PizzaWorld.Client
       _sql.Update();
 
       Console.WriteLine(user.OrderSummmary());
+      return true;
     }
   }
 }
