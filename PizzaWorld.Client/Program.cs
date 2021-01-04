@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using PizzaWorld.Domain.Models;
-using PizzaWorld.Domain.Singletons;
 
 namespace PizzaWorld.Client
 {
   class Program
   {
-    private static readonly ClientSingleton _client = ClientSingleton.Instance;
-
     private readonly static SqlClient _sql = new SqlClient();
     static void Main(string[] args)
     {
@@ -31,12 +28,14 @@ namespace PizzaWorld.Client
           case 2:
             PrintAllUsersEF();
             var user = _sql.SelectUser();
-            UserView(user);
+            if (!(user == null)) { UserView(user); }
+            else { Console.WriteLine("That user does not exist"); }
             break;
           case 3:
             PrintAllStoresEF();
             var store = _sql.SelectStore();
-            StoreView(store);
+            if (!(store == null)) { StoreView(store); }
+            else { Console.WriteLine("That store does not exist"); }
             break;
           case 4:
             userAction = false;
@@ -45,14 +44,6 @@ namespace PizzaWorld.Client
             Console.WriteLine("Unknown input try again");
             break;
         }
-      }
-    }
-
-    static void PrintAllStores()
-    {
-      foreach (var store in _client.Stores)
-      {
-        Console.WriteLine(store);
       }
     }
 
@@ -119,7 +110,8 @@ namespace PizzaWorld.Client
           case 2:
             PrintAllUsersEF();
             var user = _sql.SelectUser();
-            Console.WriteLine(store.UserOrderHistory(user));
+            if (!(user == null)) { Console.WriteLine(store.UserOrderHistory(user)); }
+            else { Console.WriteLine("That user does not exist"); }
             break;
           case 3:
             storeAction = false;
@@ -221,6 +213,11 @@ namespace PizzaWorld.Client
 
       PrintAllStoresEF();
       var store = _sql.SelectStore();
+      if (store == null)
+      {
+        Console.WriteLine("That store does not exist");
+        return false;
+      }
       if (!(user.SelectedStore == null))
       {
         if (!user.SelectedStore.Equals(store))
